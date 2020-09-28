@@ -1,9 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Homepage from './components/homepage/Homepage'
+import Calculators from './components/homepage/Calculators'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
+import { BrowserRouter, Route} from 'react-router-dom';
 
 const theme = createMuiTheme({
   palette: {
@@ -30,11 +30,30 @@ const theme = createMuiTheme({
 
 });
 
+
+const HomepageRouter = () => {
+  return (
+    <Homepage title="Calculateur d'interets" theme={theme}/>
+  )
+};
+
+const CalculatorRouter = () => {
+  return (
+    <Calculators title="Tes calculateurs" theme={theme}/>
+  )
+};
+
+
+
+
 function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <Homepage title="Calculateur d'interets" theme={theme}/>
+        <BrowserRouter>
+          <Route path="/" exact component={HomepageRouter} />
+          <Route path="/calcs" exact component={CalculatorRouter} />
+        </BrowserRouter>
       </ThemeProvider>
     </div>
   );

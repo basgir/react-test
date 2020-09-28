@@ -37,7 +37,7 @@ export class MenuBar extends Component {
             <Grid container spacing={3} style={{marginTop:'5px', marginBottom:'5px'}}>
             <Grid item xs={12} sm={6}>
               <Typography variant="h6" align="left" style={{paddingLeft:'10px'}}>
-                <Link variant="inherit" underline="none" href="https://bastiencollin.fr">
+                <Link variant="inherit" underline="none" href="/">
                 <b style={{color : theme.palette.text.primary}}>BASTIEN </b>
                 <b style={{color : theme.palette.text.secondary}}>COLLIN</b>
                 </Link>
@@ -75,7 +75,7 @@ export class MenuBar extends Component {
                 >
                   <MenuItem onClick={this.handleClose}>
                     <Typography variant="body1" align="center" color="textPrimary">
-                      <Link variant="inherit" underline="none" href="/calc/compound-interest" color="textPrimary" aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClick}>
+                      <Link variant="inherit" underline="none" href="/calcs" color="textPrimary" aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClick}>
                 Calculateur d'interêts composés
                       </Link>
                     </Typography>
