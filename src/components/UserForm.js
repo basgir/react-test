@@ -14,15 +14,28 @@ import Dashboard from './dashboard/Dashboard';
 export class UserForm extends Component {
 
     state = {
-      principal : 0 ,
+      principal : 100 ,
       t: 1,
-      data : []
+      n: 12,
+      r: 10,
+      data : [],
+      amount : 1,
     } 
-
+  
+    computeAmount = (prevState, props) => {
+      return prevState.principal * Math.pow(1 + (prevState.r/100)/prevState.n,(prevState.n*prevState.t));
+    }
+    generateList = (prevState, props) => {
+      const arr = Array.from({length: prevState.t}, (v, k) => this.computeAmount(prevState,k+1));  
+      console.log(arr)
+      return arr 
+    }
     handleChange = (e) => {
       this.setState({[e.target.name] : e.target.value});
+      this.setState((prevState,props) => ({amount : this.computeAmount(prevState)}));
+      this.setState((prevState,props) => ({data : this.generateList(prevState)}));
     }
-
+    
     render() {
         const {theme} = this.props;
         const handleChange = this.handleChange.bind(this);
@@ -89,7 +102,7 @@ export class UserForm extends Component {
           <MenuItem value={2}>Deux fois par an</MenuItem>
           <MenuItem value={1}>Une fois par an</MenuItem>
         </Select>
-      </FormControl>
+          </FormControl>
           </Grid>         
           <Grid item xs={12} sm={6}>
           <Typography variant="h5">
@@ -100,8 +113,8 @@ export class UserForm extends Component {
           <FormControl variant="outlined" color="primary">
           <OutlinedInput
             id="outlined-adornment-weight"
-            value={values.principal}
-            name="principal"
+            value={values.r}
+            name="r"
             onChange={handleChange}
             style={{color: 'black'}}
             endAdornment={<InputAdornment position="end" ><Typography>%</Typography></InputAdornment>}
@@ -130,9 +143,11 @@ export class UserForm extends Component {
           />
         </FormControl>
           </Grid>
-          
         </Grid>
-        <Dashboard title="Résultats" year={values.t}/>
+          <Typography>
+            {this.state.amount}
+          </Typography>
+        <Dashboard title="Résultats" data={this.state.data}/>
          </Container>
           </Box>
         )

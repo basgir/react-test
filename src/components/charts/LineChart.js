@@ -5,7 +5,8 @@ import classes from "./LineChart.module.css";
 export default class LineGraph extends Component {
     state = {
         year: this.props.year,
-        labels : [...Array(10).keys()]
+        labels : this.props.labels,
+        data : this.props.data,
     }
 
 
@@ -22,7 +23,7 @@ export default class LineGraph extends Component {
                 datasets: [
                     {
                         label: "$",
-                        data: [10,11,12,14,15,17,20,24,28,32],
+                        data: this.state.data
                     }
                 ]
             },
